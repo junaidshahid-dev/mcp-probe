@@ -1,0 +1,3 @@
+# mcp-probe core has NO required runtime deps beyond the stdlib.
+# For real stdio servers you'll typically also want the target server's own deps.
+pytest>=8.0
