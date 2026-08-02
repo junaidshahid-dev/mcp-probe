@@ -40,7 +40,21 @@ python -m mcp_probe.cli --cmd "python my_server.py"
 
 # write a Markdown report, and fail CI if the score is too low
 python -m mcp_probe.cli --cmd "python my_server.py" --markdown audit.md --fail-under 75
+
+# produce a client-ready HTML audit report (self-contained, no external assets)
+python -m mcp_probe.cli --cmd "node dist/index.js" --html audit.html
 ```
+
+## Audited in the wild
+
+Seven public MCP servers audited - four official, three community. The official servers all
+score 100/A; `REDACTED-PENDING-DISCLOSURE` scores 69/C because it accepts calls with required
+arguments missing and interpolates `undefined` into a `REDACTED` shell command.
+
+Auditing them also exposed **three false positives and one false negative in mcp-probe itself**,
+all now fixed and regression-tested. Existing MCP scanners run around a 78% false-positive rate;
+a scanner that fails well-built servers trains people to ignore it, so calibration is the
+product. Full write-up: [`audit/FINDINGS.md`](audit/FINDINGS.md).
 
 ## Design notes
 

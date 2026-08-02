@@ -124,3 +124,39 @@ def test_tools_requiring_task_support_are_skipped_not_failed():
     assert not any(f.tool == "needs_task" and f.severity is Severity.FAIL for f in r.findings)
     # skipping must cost nothing: identical score to the same server without that tool
     assert r.score() == probe_server(WithoutTaskTool(), "baseline").score()
+
+
+# ------------------------------------------------------------ HTML deliverable
+def test_html_report_is_self_contained_and_complete():
+    """The client deliverable must stand alone: no external CSS/JS/images to break in email."""
+    from mcp_probe.html_report import to_html
+    r = probe_server(BrokenServer(), "broken-server")
+    h = to_html(r, author="M. Junaid Shahid", contact="junaidshahid725@gmail.com")
+
+    assert h.startswith("<!doctype html>") and "</html>" in h
+    assert "<link" not in h and "<script" not in h and "src=" not in h   # no external assets
+    assert str(r.score()) in h and f">{r.grade()}<" in h
+    assert "M. Junaid Shahid" in h and "junaidshahid725@gmail.com" in h
+    assert "What was tested" in h                       # method is explained to a non-expert
+
+
+def test_html_report_shows_clean_tools_too():
+    """A report that lists only problems reads as an attack; an assessment shows everything."""
+    from mcp_probe.html_report import to_html
+    h = to_html(probe_server(WellBehavedServer(), "good-server"))
+    assert "No problems found" in h
+    assert "echo" in h
+
+
+def test_html_report_escapes_server_output():
+    """Server-controlled strings must never become live markup in the report."""
+    from mcp_probe.html_report import to_html
+    from mcp_probe.model import Finding, Report, Severity
+
+    rep = Report(server="<img src=x onerror=alert(1)>", tools=[])
+    rep.add(Finding("<script>bad()</script>", "xss", Severity.FAIL,
+                    "<b>not bold</b>", {"error": "<script>alert(2)</script>"}))
+    h = to_html(rep)
+    assert "<script>bad()</script>" not in h
+    assert "<img src=x onerror" not in h
+    assert "&lt;script&gt;" in h                        # escaped, not executed
