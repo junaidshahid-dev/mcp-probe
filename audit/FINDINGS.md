@@ -12,32 +12,16 @@ Seven real, publicly installable MCP servers audited - four official, three comm
 | `@modelcontextprotocol/server-filesystem` | 14 | 100 | A |
 | `@upstash/context7-mcp` | 2 | 100 | A |
 | `@playwright/mcp` | 24 | 97 | A |
-| `REDACTED-PENDING-DISCLOSURE` | 23 | **69** | **C** |
+| *(community server, pending disclosure)* | 23 | **69** | **C** |
 
 The official servers are genuinely well built: they reject wrong-typed and missing arguments
 cleanly, and survive empty, 100k-character and injection-shaped strings without crashing.
 
-## The real finding: `REDACTED-PENDING-DISCLOSURE` does not validate its inputs
+## One community server is pending disclosure
 
-Called with **no arguments at all**, `REDACTED` did not refuse. It built and executed:
-
-```
-REDACTED scale deployment  --replicas=undefined --namespace=default
-```
-
-Its own schema declares `name` and `replicas` as required. Neither is enforced; the missing
-values are interpolated straight into a shell command. 12 further tools answer invalid input
-with an unhandled runtime error rather than validation, e.g.:
-
-```
-input.resourceType.toLowerCase is not a function
-```
-
-That is not a rejection - it is a crash inside the handler that happens to be caught, and it
-leaks implementation detail back to the caller. For a server that shells out to `REDACTED`,
-unvalidated input reaching command construction is the wrong default.
-
-*(Reported to the maintainer before publication.)*
+One of the audited servers has an input-validation gap that I have reported privately to its
+maintainer through their stated security channel. Details are withheld here until they have had
+a reasonable opportunity to respond; this section will be updated afterwards.
 
 ## Three false positives - and one false negative - fixed in mcp-probe itself
 

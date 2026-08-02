@@ -10,3 +10,7 @@ audit/package*.json
 
 # artifacts created by audited servers during a probe run
 .playwright-mcp/
+
+# withheld until responsible disclosure completes
+audit/REDACTED-PENDING-DISCLOSURE.md
+audit/REDACTED-PENDING-DISCLOSURE.html
