@@ -7,3 +7,6 @@ __pycache__/
 node_modules/
 audit/sandbox/
 audit/package*.json
+
+# artifacts created by audited servers during a probe run
+.playwright-mcp/
