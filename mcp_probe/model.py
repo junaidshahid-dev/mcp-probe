@@ -65,9 +65,31 @@ class Report:
         return c
 
     def score(self) -> int:
-        c = self.counts()
-        penalty = c["fail"] * 15 + c["warn"] * 4 + c["info"] * 0
-        return max(0, 100 - penalty)
+        """0-100 health score: the MEAN of per-tool scores.
+
+        Scoring each tool then averaging is deliberate. A flat penalty across the whole server
+        punishes size - a careful 23-tool server accumulates more findings than a sloppy 2-tool
+        one and grades worse despite being better per unit of surface. Averaging asks the right
+        question: "what fraction of this server's tools are sound?"
+
+        INFO findings never affect the score; they are observations, not defects.
+        """
+        if not self.tools:
+            return 0 if any(f.severity is Severity.FAIL for f in self.findings) else 100
+        per_tool: dict[str, int] = {t.name: 100 for t in self.tools}
+        # Tools we could not probe are EXCLUDED from the average rather than counted as
+        # perfect: an untested tool is unknown, not sound. Counting it 100 would let a server
+        # raise its grade simply by having tools this client cannot exercise.
+        skipped = {f.tool for f in self.findings if f.check == "skipped-task-support"}
+        for f in self.findings:
+            if f.tool not in per_tool:
+                continue
+            if f.severity is Severity.FAIL:
+                per_tool[f.tool] -= 50
+            elif f.severity is Severity.WARN:
+                per_tool[f.tool] -= 20
+        scored = [max(0, v) for name, v in per_tool.items() if name not in skipped]
+        return int(round(sum(scored) / len(scored))) if scored else 100
 
     def grade(self) -> str:
         s = self.score()

@@ -13,9 +13,21 @@ input is a WARN (the tool isn't validating).
 """
 from __future__ import annotations
 
+import re
+
 from .client import MCPClient, ToolError
 from .fuzz import adversarial_cases, valid_case
 from .model import Finding, Report, Severity, ToolSpec
+
+# Signatures of an UNHANDLED runtime error leaking through the error channel. A server that
+# answers "input.x.toLowerCase is not a function" did not validate the input - it crashed
+# internally and the exception happened to be caught. That is materially different from a
+# deliberate "invalid argument" rejection, and it usually leaks implementation detail too.
+_UNHANDLED = re.compile(
+    r"is not a function|is not defined|cannot read propert|undefined is not|"
+    r"TypeError|ReferenceError|AttributeError|NoneType|KeyError|IndexError|"
+    r"Traceback|unhandled|NullPointer|panic:",
+    re.I)
 
 
 def _schema_hygiene(report: Report, spec: ToolSpec) -> None:
@@ -68,6 +80,12 @@ def _run_case(client: MCPClient, name: str, case, report: Report) -> bool:
             report.add(Finding(name, case.check, Severity.WARN,
                                f"accepted clearly-invalid input ({case.note}) - not validating",
                                {"note": case.note}))
+        elif err and _UNHANDLED.search(err):
+            # rejected, but by an unhandled internal exception rather than input validation
+            report.add(Finding(name, "unhandled-error", Severity.WARN,
+                               f"crashed internally on invalid input ({case.note}) instead of "
+                               f"validating it; the raw error leaks implementation detail",
+                               {"note": case.note, "error": err}))
         else:
             report.add(Finding(name, case.check, Severity.OK,
                                f"cleanly rejected invalid input ({case.note})"))
