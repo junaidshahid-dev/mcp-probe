@@ -27,13 +27,32 @@ class Case:
     note: str = ""
 
 
-def _valid_value(prop: dict):
+# Field names whose values must look like something real. Sending "test" as a `path` or `url`
+# gets a legitimate rejection that has nothing to do with input validation - the single biggest
+# source of false positives in schema-driven fuzzing.
+_SEMANTIC_HINTS = (
+    (("path", "file", "filepath", "filename", "dir", "directory"), "."),
+    (("url", "uri", "endpoint", "webhook"), "https://example.com"),
+    (("email", "mail"), "user@example.com"),
+    (("date", "datetime", "timestamp"), "2026-01-01"),
+    (("query", "search", "q", "text", "message", "content", "prompt"), "test"),
+    (("id", "uuid", "key", "token", "name"), "test"),
+)
+
+
+def _valid_value(prop: dict, field_name: str = ""):
     t = prop.get("type", "string")
     if "enum" in prop and prop["enum"]:
         return prop["enum"][0]
     if "default" in prop:
         return prop["default"]
-    return {"string": "test", "integer": 1, "number": 1.0, "boolean": True,
+    if t == "string":
+        low = field_name.lower()
+        for names, value in _SEMANTIC_HINTS:
+            if any(n == low or low.endswith("_" + n) or low.startswith(n + "_") for n in names):
+                return value
+        return "test"
+    return {"integer": 1, "number": 1.0, "boolean": True,
             "array": [], "object": {}}.get(t, "test")
 
 
@@ -45,12 +64,14 @@ def _wrong_typed_value(prop: dict):
 
 
 def valid_case(spec: ToolSpec) -> Case:
-    args = {name: _valid_value(p) for name, p in spec.properties.items()
-            if name in spec.required or "default" not in p}
-    # ensure required keys present even if not in properties
-    for r in spec.required:
-        args.setdefault(r, "test")
-    return Case("valid", args, expect_accept=True, note="baseline valid input")
+    """MINIMAL valid input: required fields only.
+
+    Optional fields are deliberately omitted. Filling them in triggers cross-field constraints
+    that JSON Schema cannot express (e.g. filesystem's "cannot specify both head and tail"),
+    producing a rejection that looks like a server bug but is correct behaviour.
+    """
+    args = {name: _valid_value(spec.properties.get(name, {}), name) for name in spec.required}
+    return Case("valid", args, expect_accept=True, note="minimal valid input (required fields only)")
 
 
 def adversarial_cases(spec: ToolSpec) -> list[Case]:

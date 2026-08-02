@@ -75,7 +75,8 @@ class StdioMCPClient:
     def list_tools(self) -> list[ToolSpec]:
         res = self._rpc("tools/list", {})
         return [ToolSpec(t["name"], t.get("description", ""),
-                         t.get("inputSchema", t.get("input_schema", {})))
+                         t.get("inputSchema", t.get("input_schema", {})),
+                         t.get("execution", {}) or {})
                 for t in res.get("tools", [])]
 
     def call_tool(self, name: str, args: dict) -> dict:

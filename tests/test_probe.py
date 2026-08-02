@@ -92,3 +92,35 @@ def test_empty_server_warns():
         def call_tool(self, n, a): raise ToolError("n/a")
     r = probe_server(Empty(), "empty")
     assert any(f.check == "no-tools" for f in r.findings)
+
+
+def test_tools_requiring_task_support_are_skipped_not_failed():
+    """Regression: a tool declaring execution.taskSupport='required' refuses every call from a
+    plain client. Probing it produced a false 'rejected its own valid input' FAIL - which would
+    have become a bogus bug report to a maintainer. It must be skipped as INFO instead.
+
+    Found by auditing the official @modelcontextprotocol/server-everything.
+    """
+    class TaskServer:
+        def list_tools(self):
+            return [ToolSpec("needs_task", "Requires task augmentation", ECHO_SCHEMA,
+                             {"taskSupport": "required"}),
+                    ToolSpec("normal", "Plain tool", ECHO_SCHEMA)]
+
+        def call_tool(self, name, args):
+            if name == "needs_task":
+                raise ToolError("MCP error -32601: requires task augmentation")
+            if "text" not in args or not isinstance(args["text"], str):
+                raise ToolError("bad input")
+            return {"content": args["text"]}
+
+    class WithoutTaskTool(TaskServer):
+        def list_tools(self):
+            return [ToolSpec("normal", "Plain tool", ECHO_SCHEMA)]
+
+    r = probe_server(TaskServer(), "task-server")
+    assert any(f.check == "skipped-task-support" and f.severity is Severity.INFO
+               for f in r.findings)
+    assert not any(f.tool == "needs_task" and f.severity is Severity.FAIL for f in r.findings)
+    # skipping must cost nothing: identical score to the same server without that tool
+    assert r.score() == probe_server(WithoutTaskTool(), "baseline").score()

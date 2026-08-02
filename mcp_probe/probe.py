@@ -54,8 +54,15 @@ def _run_case(client: MCPClient, name: str, case, report: Report) -> bool:
             report.add(Finding(name, "valid-baseline", Severity.OK,
                                "accepts a schema-valid argument set"))
         else:
-            report.add(Finding(name, "valid-baseline", Severity.FAIL,
-                               "rejected its OWN schema-valid input", {"error": err}))
+            # A CLEAN rejection of schema-valid input is usually correct behaviour, not a bug:
+            # the tool may need a path that exists, an id that resolves, or a combination the
+            # schema cannot express. A generic prober cannot know the semantics, so reporting
+            # this as a failure manufactures false positives (the flaw that makes most scanners
+            # untrustworthy). Only a CRASH is a genuine failure - handled above.
+            report.add(Finding(name, "valid-baseline", Severity.INFO,
+                               "declined minimal valid input - likely needs semantically real "
+                               "values (e.g. an existing path/id), not a defect",
+                               {"error": err}))
     elif case.check in ("missing-required", "wrong-type"):
         if accepted:
             report.add(Finding(name, case.check, Severity.WARN,
@@ -79,6 +86,14 @@ def probe_server(client: MCPClient, server_label: str) -> Report:
 
     for spec in tools:
         _schema_hygiene(report, spec)
+        if spec.needs_task_support:
+            # The tool declares execution.taskSupport = "required": it will refuse every call
+            # from a client that lacks task augmentation, including valid ones. Probing it
+            # would produce a false "rejected its own valid input". Skip and say so.
+            report.add(Finding(spec.name, "skipped-task-support", Severity.INFO,
+                               "tool requires client task augmentation; not probed by this "
+                               "client (declared execution.taskSupport='required')"))
+            continue
         alive = _run_case(client, spec.name, valid_case(spec), report)
         for case in adversarial_cases(spec):
             if not alive:

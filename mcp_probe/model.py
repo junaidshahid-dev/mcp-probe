@@ -27,6 +27,7 @@ class ToolSpec:
     name: str
     description: str
     input_schema: dict
+    execution: dict = field(default_factory=dict)   # e.g. {"taskSupport": "required"}
 
     @property
     def required(self) -> list[str]:
@@ -35,6 +36,16 @@ class ToolSpec:
     @property
     def properties(self) -> dict:
         return self.input_schema.get("properties", {}) or {}
+
+    @property
+    def needs_task_support(self) -> bool:
+        """True when the tool can only be called by a client that implements task augmentation.
+
+        Such a tool will refuse ANY call from a plain client - including a schema-valid one.
+        Probing it without honouring this would report a false 'rejected its own valid input',
+        which is a bug report the maintainer would rightly reject.
+        """
+        return str(self.execution.get("taskSupport", "")).lower() == "required"
 
 
 @dataclass
