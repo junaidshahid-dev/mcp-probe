@@ -30,6 +30,39 @@ _UNHANDLED = re.compile(
     re.I)
 
 
+# Evidence that a "server" is really a thin proxy to somebody else's production backend:
+# an absolute URL to an external host in the reply, or a server-side path from a container /
+# serverless runtime that does not exist on this machine.
+_REMOTE_BACKEND = re.compile(
+    r"https?://(?!localhost|127\.0\.0\.1|0\.0\.0\.0|\[::1\])[a-z0-9.-]+\.[a-z]{2,}"
+    r"|/var/task/|/var/runtime/|/usr/src/app/|/opt/nodejs/",
+    re.I)
+
+
+class RemoteBackendDetected(Exception):
+    """Raised when probing would send adversarial traffic to a third party's live service."""
+
+
+def _looks_remote(client: MCPClient, spec: ToolSpec) -> str | None:
+    """ONE probe call, purely to find out where the tool's work actually happens.
+
+    Fuzzing a local process costs that process some CPU. Fuzzing a server that forwards to a
+    vendor's production API sends a few hundred adversarial requests - including 100k-char
+    strings - to infrastructure whose owner never agreed to it. Those are not the same act, and
+    the tool should not quietly do the second one. Learning this costs a single call instead of
+    the ~10-per-tool a full run would send.
+    """
+    try:
+        result = client.call_tool(spec.name, valid_case(spec).args)
+        text = str(result)
+    except ToolError as e:
+        text = str(e)
+    except Exception:
+        return None                                     # transport trouble; the run will catch it
+    m = _REMOTE_BACKEND.search(text)
+    return m.group(0) if m else None
+
+
 def _schema_hygiene(report: Report, spec: ToolSpec) -> None:
     if not spec.description.strip():
         report.add(Finding(spec.name, "no-description", Severity.WARN,
@@ -95,12 +128,25 @@ def _run_case(client: MCPClient, name: str, case, report: Report) -> bool:
     return True
 
 
-def probe_server(client: MCPClient, server_label: str) -> Report:
+def probe_server(client: MCPClient, server_label: str, allow_remote: bool = False) -> Report:
     tools = client.list_tools()
     report = Report(server=server_label, tools=tools)
     if not tools:
         report.add(Finding("-", "no-tools", Severity.WARN, "server advertised zero tools"))
         return report
+
+    if not allow_remote:
+        probe_target = next((t for t in tools if not t.needs_task_support), None)
+        if probe_target is not None:
+            evidence = _looks_remote(client, probe_target)
+            if evidence:
+                raise RemoteBackendDetected(
+                    f"'{probe_target.name}' appears to forward to a remote service "
+                    f"(saw {evidence!r} in its reply).\n"
+                    f"A full run would send roughly {10 * len(tools)} adversarial requests - "
+                    f"including 100,000-character strings - to infrastructure that is not yours.\n"
+                    f"Audit it only against a service you own or have permission to test, then "
+                    f"pass --allow-remote.")
 
     for spec in tools:
         _schema_hygiene(report, spec)

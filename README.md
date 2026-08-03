@@ -45,16 +45,32 @@ python -m mcp_probe.cli --cmd "python my_server.py" --markdown audit.md --fail-u
 python -m mcp_probe.cli --cmd "node dist/index.js" --html audit.html
 ```
 
+If the server turns out to forward its work to a remote service, mcp-probe stops before fuzzing
+it. A full run would send hundreds of adversarial requests — including 100k-character strings —
+to somebody else's production infrastructure. Pass `--allow-remote` **only** for a service you
+own or have written permission to test.
+
 ## Audited in the wild
 
-Seven public MCP servers audited - four official, three community. The official servers all
-score 100/A; `REDACTED-PENDING-DISCLOSURE` scores 69/C because it accepts calls with required
-arguments missing and interpolates `undefined` into a `REDACTED` shell command.
+**Thirteen public MCP servers audited** — including servers from Anthropic, Google, Microsoft,
+MongoDB and Upstash. Eleven score 97–100/A. Two have real input-validation gaps and have been
+reported privately through their maintainers' stated security channels; they stay unnamed here
+until those maintainers have had time to respond.
 
-Auditing them also exposed **three false positives and one false negative in mcp-probe itself**,
-all now fixed and regression-tested. Existing MCP scanners run around a 78% false-positive rate;
-a scanner that fails well-built servers trains people to ignore it, so calibration is the
-product. Full write-up: [`audit/FINDINGS.md`](audit/FINDINGS.md).
+Three more **would not start at all** on a fresh install — two of Anthropic's own servers and
+one of Microsoft's — because they declare an unbounded `mcp>=` dependency and the Python SDK's
+2.0 release removed the APIs they use. Pinning `mcp<2` fixes all three, after which each scores
+100/A. The code was fine; the packaging was not.
+
+Auditing them also exposed **five false positives, one false negative, and one judgement error**
+in mcp-probe itself — all fixed and regression-tested. The judgement error is the one worth
+reading: mcp-probe fuzzed a server that turned out to be a thin proxy to a vendor's production
+API, sending ~270 adversarial requests to infrastructure that was not mine. It now detects that
+in a single call and refuses to continue without `--allow-remote`.
+
+Existing MCP scanners run around a 78% false-positive rate; a scanner that fails well-built
+servers trains people to ignore it, so calibration is the product. Full write-up:
+[`audit/FINDINGS.md`](audit/FINDINGS.md).
 
 ## Design notes
 

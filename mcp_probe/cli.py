@@ -13,7 +13,7 @@ import shlex
 import sys
 
 from .client import StdioMCPClient
-from .probe import probe_server
+from .probe import RemoteBackendDetected, probe_server
 from .html_report import to_html
 from .report import to_markdown, to_text
 
@@ -31,10 +31,18 @@ def main() -> None:
                     help="contact line on the HTML report")
     ap.add_argument("--fail-under", type=int, default=0,
                     help="exit non-zero if the score is below this (for CI). default 0 = never fail")
+    ap.add_argument("--allow-remote", action="store_true",
+                    help="permit fuzzing a server that forwards to a remote service. Only for "
+                         "services you own or have written permission to test - a full run "
+                         "sends hundreds of adversarial requests to whatever is behind it.")
     a = ap.parse_args()
 
-    with StdioMCPClient(shlex.split(a.cmd)) as client:
-        report = probe_server(client, a.cmd)
+    try:
+        with StdioMCPClient(shlex.split(a.cmd)) as client:
+            report = probe_server(client, a.cmd, allow_remote=a.allow_remote)
+    except RemoteBackendDetected as e:
+        print(f"\nrefusing to fuzz: {e}", file=sys.stderr)
+        sys.exit(2)
 
     print(to_text(report))
     if a.markdown:

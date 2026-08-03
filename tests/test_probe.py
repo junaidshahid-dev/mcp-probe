@@ -126,6 +126,47 @@ def test_tools_requiring_task_support_are_skipped_not_failed():
     assert r.score() == probe_server(WithoutTaskTool(), "baseline").score()
 
 
+# ------------------------------------------------- don't fuzz other people's production
+def test_refuses_to_fuzz_a_server_that_proxies_to_a_remote_service():
+    """A server that forwards to a vendor's live API must not be fuzzed by default.
+
+    Fuzzing a local process costs it some CPU. Fuzzing a proxy sends hundreds of adversarial
+    requests - including 100k-char strings - to infrastructure whose owner never agreed to it.
+    Learned the hard way while auditing a published server that turned out to be a thin client
+    for a hosted service; ~270 requests had already gone out before I thought about it.
+    """
+    from mcp_probe.probe import RemoteBackendDetected
+
+    class ProxyServer:
+        def __init__(self): self.calls = 0
+        def list_tools(self):
+            return [ToolSpec("render", "Render a chart", ECHO_SCHEMA)]
+        def call_tool(self, name, args):
+            self.calls += 1
+            return {"content": "https://cdn.example-vendor.com/generated/abc/original"}
+
+    s = ProxyServer()
+    with pytest.raises(RemoteBackendDetected) as e:
+        probe_server(s, "proxy")
+    assert "remote service" in str(e.value)
+    assert s.calls == 1, "detection must cost ONE call, not a full fuzzing run"
+
+    # explicit opt-in still works, for a service you actually own
+    r = probe_server(ProxyServer(), "proxy", allow_remote=True)
+    assert r.tools and r.findings
+
+
+def test_localhost_is_not_treated_as_someone_elses_service():
+    """A server talking to 127.0.0.1 is yours. Blocking that would make the guard useless."""
+    class LocalServer(WellBehavedServer):
+        def call_tool(self, name, args):
+            super().call_tool(name, args)
+            return {"content": "fetched http://localhost:8080/health ok"}
+
+    r = probe_server(LocalServer(), "local")             # must not raise
+    assert r.score() >= 90
+
+
 # ------------------------------------------------------------ HTML deliverable
 def test_html_report_is_self_contained_and_complete():
     """The client deliverable must stand alone: no external CSS/JS/images to break in email."""

@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import subprocess
+import tempfile
 from typing import Protocol
 
 from .model import ToolSpec
@@ -34,9 +35,20 @@ class StdioMCPClient:
         self._id = 0
 
     def __enter__(self) -> "StdioMCPClient":
+        # MCP is JSON-RPC over UTF-8. text=True alone decodes with the LOCALE codepage, so on a
+        # Windows cp1252 console any server with non-ASCII tool text (CJK descriptions, curly
+        # quotes, emoji) killed the probe with UnicodeDecodeError before a single tool was
+        # audited. errors="replace" keeps a malformed byte from aborting the run - it surfaces
+        # as a JSON parse error attributed to the server, which is where it belongs.
+        # stderr goes to a temp file rather than DEVNULL. A server that dies during startup
+        # (bad args, missing dependency, incompatible SDK) otherwise produced only
+        # "server closed the connection" - true, useless, and the single most common thing a
+        # user hits. The traceback is on stderr; keep it and put it in the error message.
+        self._stderr = tempfile.TemporaryFile(mode="w+", encoding="utf-8", errors="replace")
         self.proc = subprocess.Popen(
             self.command, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-            stderr=subprocess.DEVNULL, text=True, bufsize=1)
+            stderr=self._stderr, text=True, bufsize=1,
+            encoding="utf-8", errors="replace")
         self._rpc("initialize", {"protocolVersion": "2024-11-05", "capabilities": {},
                                  "clientInfo": {"name": "mcp-probe", "version": "1.0"}})
         self._notify("notifications/initialized", {})
@@ -49,6 +61,18 @@ class StdioMCPClient:
                 self.proc.wait(timeout=5)
             except subprocess.TimeoutExpired:
                 self.proc.kill()
+        if getattr(self, "_stderr", None):
+            self._stderr.close()
+
+    def _stderr_tail(self, limit: int = 800) -> str:
+        """Last of the server's stderr, for when it dies without explaining itself."""
+        try:
+            self._stderr.flush()
+            self._stderr.seek(0)
+            text = self._stderr.read().strip()
+        except Exception:                                  # closed / unreadable - not worth failing over
+            return ""
+        return f"\n--- server stderr (last {limit} chars) ---\n{text[-limit:]}" if text else ""
 
     def _send(self, obj: dict) -> None:
         assert self.proc and self.proc.stdin
@@ -65,8 +89,15 @@ class StdioMCPClient:
         while True:                                   # skip notifications, read our response
             line = self.proc.stdout.readline()
             if not line:
-                raise ToolError("server closed the connection")
-            msg = json.loads(line)
+                raise ToolError("server closed the connection" + self._stderr_tail())
+            try:
+                msg = json.loads(line)
+            except json.JSONDecodeError as e:
+                # Not our bug: the server wrote non-JSON to stdout (a log line, a banner, or
+                # malformed UTF-8). Say so, and show what it actually sent.
+                raise ToolError(
+                    f"server sent non-JSON on stdout ({e}): {line[:200]!r}"
+                    + self._stderr_tail()) from None
             if msg.get("id") == self._id:
                 if "error" in msg:
                     raise ToolError(json.dumps(msg["error"]))
