@@ -11,6 +11,18 @@ audit/package*.json
 # artifacts created by audited servers during a probe run
 .playwright-mcp/
 
-# withheld until responsible disclosure completes
-audit/REDACTED-PENDING-DISCLOSURE.md
-audit/REDACTED-PENDING-DISCLOSURE.html
+# Disclosure paperwork NEVER belongs in a public repo.
+# A DISCLOSURE file contains the target's name, version and a working reproduction - i.e. the
+# exact contents an embargo exists to withhold. Publishing one next to a redacted FINDINGS.md
+# makes the redaction meaningless. This pattern is deliberately broad; keep it that way.
+audit/DISCLOSURE*.md
+**/DISCLOSURE*.md
+
+# Reports for servers under embargo. Named by pattern, not by target: a .gitignore is a public
+# file, so listing "audit/<vendor>-report.html" announces exactly who the unpublished finding is
+# about. Put an embargoed report under audit/embargo/ and it stays out of the repo.
+audit/embargo/
+audit/*_report.html
+
+# throwaway venv used to run Python MCP servers under audit
+audit/.pyservers/
