@@ -7,6 +7,29 @@ actually validate its inputs, or does it crash?" check that the MCP ecosystem is
 
 ![demo](assets/demo.png)
 
+## Audited in the wild
+
+**Thirteen public MCP servers audited** — including servers from Anthropic, Google, Microsoft,
+MongoDB and Upstash. Eleven score 97–100/A. Two have real input-validation gaps and have been
+reported privately through their maintainers' stated security channels; they stay unnamed here
+until those maintainers have had time to respond.
+
+**Every Python server tested — three of three — would not start at all on a fresh install.** Two
+were Anthropic's own and one Microsoft's. All three declare an unbounded `mcp>=` dependency, and
+the Python SDK's 2.0 release removed the APIs they use. Pinning `mcp<2` fixes all three, after
+which each scores 100/A. The code was fine; the packaging was not. None of the ten Node servers
+had this problem.
+
+Auditing them also exposed **five false positives, one false negative, and one judgement error**
+in mcp-probe itself — all fixed and regression-tested. The judgement error is the one worth
+reading: mcp-probe fuzzed a server that turned out to be a thin proxy to a vendor's production
+API, sending ~270 adversarial requests to infrastructure that was not mine. It now detects that
+in a single call and refuses to continue without `--allow-remote`.
+
+Existing MCP scanners run around a 78% false-positive rate; a scanner that fails well-built
+servers trains people to ignore it, so calibration is the product. Full write-up:
+[`audit/FINDINGS.md`](audit/FINDINGS.md).
+
 ## What it checks (per tool)
 
 | Check | Good outcome | Bad outcome |
@@ -50,28 +73,6 @@ it. A full run would send hundreds of adversarial requests — including 100k-ch
 to somebody else's production infrastructure. Pass `--allow-remote` **only** for a service you
 own or have written permission to test.
 
-## Audited in the wild
-
-**Thirteen public MCP servers audited** — including servers from Anthropic, Google, Microsoft,
-MongoDB and Upstash. Eleven score 97–100/A. Two have real input-validation gaps and have been
-reported privately through their maintainers' stated security channels; they stay unnamed here
-until those maintainers have had time to respond.
-
-Three more **would not start at all** on a fresh install — two of Anthropic's own servers and
-one of Microsoft's — because they declare an unbounded `mcp>=` dependency and the Python SDK's
-2.0 release removed the APIs they use. Pinning `mcp<2` fixes all three, after which each scores
-100/A. The code was fine; the packaging was not.
-
-Auditing them also exposed **five false positives, one false negative, and one judgement error**
-in mcp-probe itself — all fixed and regression-tested. The judgement error is the one worth
-reading: mcp-probe fuzzed a server that turned out to be a thin proxy to a vendor's production
-API, sending ~270 adversarial requests to infrastructure that was not mine. It now detects that
-in a single call and refuses to continue without `--allow-remote`.
-
-Existing MCP scanners run around a 78% false-positive rate; a scanner that fails well-built
-servers trains people to ignore it, so calibration is the product. Full write-up:
-[`audit/FINDINGS.md`](audit/FINDINGS.md).
-
 ## Design notes
 
 - **Transport-agnostic core.** Everything runs against a small `MCPClient` interface, so the
@@ -92,6 +93,18 @@ python -m pytest tests/ -q
 
 The suite audits a well-behaved server (expects grade A) **and** a deliberately broken one
 (expects the crash + missing-validation to be caught) — proving the auditor catches what it claims.
+
+## Want this run on your server?
+
+The tool is free and always will be — clone it and run it yourself. If you'd rather someone else
+did the work, I take it on as fixed-price jobs:
+
+- **[Fix a server that won't install](https://www.upwork.com/services/product/development-it-your-mcp-server-fixed-so-it-installs-and-runs-on-a-clean-machine-2084703446690548213)** — the failure described above, reproduced in a clean
+  environment and pinned properly
+- **[Full audit with a written report](https://www.upwork.com/services/product/development-it-a-full-audit-of-your-mcp-server-showing-exactly-what-breaks-2084343446941038744)** — every tool fuzzed, every finding verified by hand
+- **[Build an MCP server for your API](https://www.upwork.com/services/product/development-it-a-custom-mcp-server-in-python-so-ai-agents-can-use-your-tools-2084698948344181421)** — typed tools, tests, Docker, full source
+
+Or just open an issue and ask — questions about your own server are free.
 
 ---
 Built by **M. Junaid Shahid** — Python backend & AI tooling.
