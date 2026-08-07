@@ -26,3 +26,9 @@ audit/*_report.html
 
 # throwaway venv used to run Python MCP servers under audit
 audit/.pyservers/
+exclude.txt
+audit/OUTREACH_DRAFTS.md
+outreach_targets.json
+stage2_*.txt
+*.db
+pypi_mcp_names.txt

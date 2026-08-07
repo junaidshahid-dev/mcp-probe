@@ -1,0 +1,250 @@
+[
+  {
+    "package": "defoneos-cesium-mcp",
+    "mcp_version": "2.0.0",
+    "entrypoint": "defoneos-cesium-mcp.exe",
+    "verdict": "BROKEN",
+    "error": "ModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_defoneos_cesium_mcp\\Scripts\\defoneos-cesium-mcp.exe\\__main__.py\", line 2, in <module>\n    from defoneos_cesium_mcp.server import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_defoneos_cesium_mcp\\Lib\\site-packages\\defoneos_cesium_mcp\\server.py\", line 23, in <module>\n    from mcp.server.fastmcp import FastMCP\nModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "mcp-weather-crj6666",
+    "mcp_version": "1.29.0",
+    "entrypoint": "mcp-weather-crj6666.exe",
+    "verdict": "STARTS_OK",
+    "detail": "rc=0"
+  },
+  {
+    "package": "mcp-server-discogs",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mcp-server-discogs.exe",
+    "verdict": "STARTS_OK",
+    "detail": "rc=1"
+  },
+  {
+    "package": "iflow-mcp_NapthaAI_automcp",
+    "mcp_version": "2.0.0",
+    "entrypoint": "automcp.exe",
+    "verdict": "BROKEN",
+    "error": "ModuleNotFoundError: No module named 'yaml'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_iflow_mcp_NapthaAI_automcp\\Scripts\\automcp.exe\\__main__.py\", line 2, in <module>\n    from automcp.cli import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_iflow_mcp_NapthaAI_automcp\\Lib\\site-packages\\automcp\\cli.py\", line 4, in <module>\n    import yaml\nModuleNotFoundError: No module named 'yaml'",
+    "fix_confirmed": false,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "iflow-mcp_daraja",
+    "mcp_version": "2.0.0",
+    "entrypoint": "cffi-gen-src.exe",
+    "verdict": "STARTS_OK",
+    "detail": "rc=2"
+  },
+  {
+    "package": "colectica-mcp-server",
+    "mcp_version": "2.0.0",
+    "entrypoint": "cffi-gen-src.exe",
+    "verdict": "STARTS_OK",
+    "detail": "rc=2"
+  },
+  {
+    "package": "iflow-mcp_georgeantonopoulos-basecamp-mcp-server",
+    "mcp_version": "2.0.0",
+    "entrypoint": "basecamp-mcp.exe",
+    "verdict": "BROKEN",
+    "error": "ModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_iflow_mcp_georgeantonopoulos_basecamp_mcp_server\\Scripts\\basecamp-mcp.exe\\__main__.py\", line 2, in <module>\n    from basecamp_fastmcp import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_iflow_mcp_georgeantonopoulos_basecamp_mcp_server\\Lib\\site-packages\\basecamp_fastmcp.py\", line 15, in <module>\n    from mcp.server.fastmcp import FastMCP\nModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "openf1-mcp-server",
+    "mcp_version": "2.0.0",
+    "entrypoint": "openf1-mcp-server.exe",
+    "verdict": "BROKEN",
+    "error": "ModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_openf1_mcp_server\\Scripts\\openf1-mcp-server.exe\\__main__.py\", line 2, in <module>\n    from openf1_mcp.server import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_openf1_mcp_server\\Lib\\site-packages\\openf1_mcp\\server.py\", line 3, in <module>\n    from mcp.server.fastmcp import FastMCP\nModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "forevertools-mcp",
+    "mcp_version": "2.0.0",
+    "entrypoint": "forevertools-mcp.exe",
+    "verdict": "BROKEN",
+    "error": "ModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_forevertools_mcp\\Scripts\\forevertools-mcp.exe\\__main__.py\", line 2, in <module>\n    from server import mcp\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_forevertools_mcp\\Lib\\site-packages\\server.py\", line 6, in <module>\n    from mcp.server.fastmcp import FastMCP\nModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "mseep-mcp-sbom",
+    "mcp_version": "2.0.0",
+    "entrypoint": "cffi-gen-src.exe",
+    "verdict": "STARTS_OK",
+    "detail": "rc=2"
+  },
+  {
+    "package": "lihil-mcp",
+    "mcp_version": "2.0.0",
+    "entrypoint": "cffi-gen-src.exe",
+    "verdict": "STARTS_OK",
+    "detail": "rc=2"
+  },
+  {
+    "package": "claude-vision-mcp",
+    "mcp_version": "2.0.0",
+    "entrypoint": "claude-vision-mcp.exe",
+    "verdict": "BROKEN",
+    "error": "ModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_claude_vision_mcp\\Scripts\\claude-vision-mcp.exe\\__main__.py\", line 2, in <module>\n    from claude_vision_mcp.server import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_claude_vision_mcp\\Lib\\site-packages\\claude_vision_mcp\\server.py\", line 17, in <module>\n    from mcp.server.fastmcp import FastMCP\nModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "mcp-bocha-search",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mcp-bocha-search.exe",
+    "verdict": "BROKEN",
+    "error": "ModuleNotFoundError: No module named 'httpx'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_mcp_bocha_search\\Scripts\\mcp-bocha-search.exe\\__main__.py\", line 2, in <module>\n    from bocha_search_mcp import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_mcp_bocha_search\\Lib\\site-packages\\bocha_search_mcp\\__init__.py\", line 1, in <module>\n    from bocha_search_mcp.server import server\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_mcp_bocha_search\\Lib\\site-packages\\bocha_search_mcp\\server.py\", line 4, in <module>\n    import httpx\nModuleNotFoundError: No module named 'httpx'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "mseep-mcp-live-events",
+    "mcp_version": "2.0.0",
+    "entrypoint": "cffi-gen-src.exe",
+    "verdict": "STARTS_OK",
+    "detail": "rc=2"
+  },
+  {
+    "package": "iflow_mcp_jingcheng_chen_rhinomcp",
+    "mcp_version": "1.29.0",
+    "entrypoint": "iflow_mcp_jingcheng_chen_rhinomcp.exe",
+    "verdict": "STARTS_OK",
+    "detail": "rc=1"
+  },
+  {
+    "package": "btcpay-mcp",
+    "mcp_version": "2.0.0",
+    "entrypoint": "btcpay-mcp.exe",
+    "verdict": "BROKEN",
+    "error": "ModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_btcpay_mcp\\Scripts\\btcpay-mcp.exe\\__main__.py\", line 2, in <module>\n    from btcpay_mcp.server import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_btcpay_mcp\\Lib\\site-packages\\btcpay_mcp\\__init__.py\", line 2, in <module>\n    from .server import mcp, main  # noqa: F401\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_btcpay_mcp\\Lib\\site-packages\\btcpay_mcp\\server.py\", line 23, in <module>\n    from mcp.server.fastmcp import FastMCP\nModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "borealhost-mcp",
+    "mcp_version": "2.0.0",
+    "entrypoint": "borealhost-mcp.exe",
+    "verdict": "BROKEN",
+    "error": "ModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_borealhost_mcp\\Scripts\\borealhost-mcp.exe\\__main__.py\", line 2, in <module>\n    from mcp_server.server import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_borealhost_mcp\\Lib\\site-packages\\mcp_server\\server.py\", line 9, in <module>\n    from mcp.server.fastmcp import FastMCP\nModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "mseep-geeknews-mcp-server",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mseep-geeknews-mcp-server.exe",
+    "verdict": "BROKEN",
+    "error": "ModuleNotFoundError: No module named 'src'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_mseep_geeknews_mcp_server\\Scripts\\mseep-geeknews-mcp-server.exe\\__main__.py\", line 2, in <module>\n    from main import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_mseep_geeknews_mcp_server\\Lib\\site-packages\\main.py\", line 12, in <module>\n    from src.config import logger, setup_logging\nModuleNotFoundError: No module named 'src'",
+    "fix_confirmed": false,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "mcp-calendar-python",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mcp-calendar-python.exe",
+    "verdict": "BROKEN",
+    "error": "ModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_mcp_calendar_python\\Scripts\\mcp-calendar-python.exe\\__main__.py\", line 2, in <module>\n    from mcp_calendar.server import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_mcp_calendar_python\\Lib\\site-packages\\mcp_calendar\\__init__.py\", line 3, in <module>\n    from .server import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_mcp_calendar_python\\Lib\\site-packages\\mcp_calendar\\server.py\", line 17, in <module>\n    from mcp.server.fastmcp import FastMCP\nModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "iflow-mcp_mcp-server-servicenow",
+    "mcp_version": "2.0.0",
+    "entrypoint": "cffi-gen-src.exe",
+    "verdict": "STARTS_OK",
+    "detail": "rc=2"
+  },
+  {
+    "package": "apple-ecosystem-mcp",
+    "mcp_version": "1.29.0",
+    "entrypoint": "apple-ecosystem-mcp.exe",
+    "verdict": "STARTS_OK",
+    "detail": "rc=0"
+  },
+  {
+    "package": "pyke-mcp",
+    "verdict": "INSTALL_FAILED",
+    "detail": "ERROR: Cannot install pyke-mcp==0.1.0 and pyke-mcp==0.1.1 because these package versions have conflicting dependencies.\nERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts\n"
+  },
+  {
+    "package": "fetch-jsonpath-mcp",
+    "mcp_version": "2.0.0",
+    "entrypoint": "fetch-jsonpath-mcp.exe",
+    "verdict": "BROKEN",
+    "error": "AttributeError: 'Server' object has no attribute 'list_tools'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_fetch_jsonpath_mcp\\Scripts\\fetch-jsonpath-mcp.exe\\__main__.py\", line 2, in <module>\n    from jsonrpc_mcp.server import run\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_fetch_jsonpath_mcp\\Lib\\site-packages\\jsonrpc_mcp\\server.py\", line 13, in <module>\n    @server.list_tools()\n     ^^^^^^^^^^^^^^^^^\nAttributeError: 'Server' object has no attribute 'list_tools'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "rag-agent-mcp",
+    "mcp_version": "2.0.0",
+    "entrypoint": "cffi-gen-src.exe",
+    "verdict": "STARTS_OK",
+    "detail": "rc=2"
+  },
+  {
+    "package": "fiverr-mcp-server",
+    "mcp_version": "2.0.0",
+    "entrypoint": "fiverr-mcp-server.exe",
+    "verdict": "BROKEN",
+    "error": "ModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_fiverr_mcp_server\\Scripts\\fiverr-mcp-server.exe\\__main__.py\", line 2, in <module>\n    from fiverr_mcp_server.server import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_fiverr_mcp_server\\Lib\\site-packages\\fiverr_mcp_server\\server.py\", line 3, in <module>\n    from fiverr_mcp_server.mcp_server import mcp\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_fiverr_mcp_server\\Lib\\site-packages\\fiverr_mcp_server\\mcp_server.py\", line 1, in <module>\n    from mcp.server.fastmcp import FastMCP\nModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "linkedin-mcp-server",
+    "mcp_version": "1.29.0",
+    "entrypoint": "linkedin-mcp-server.exe",
+    "verdict": "STARTS_OK",
+    "detail": "rc=0"
+  },
+  {
+    "package": "agentline-mcp",
+    "mcp_version": "2.0.0",
+    "entrypoint": "agentline-mcp.exe",
+    "verdict": "BROKEN",
+    "error": "ModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_agentline_mcp\\Scripts\\agentline-mcp.exe\\__main__.py\", line 2, in <module>\n    from agentline_mcp.__main__ import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_agentline_mcp\\Lib\\site-packages\\agentline_mcp\\__main__.py\", line 5, in <module>\n    from .server import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_2w9ne8xm\\v_agentline_mcp\\Lib\\site-packages\\agentline_mcp\\server.py\", line 21, in <module>\n    from mcp.server.fastmcp import FastMCP\nModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "iflow-mcp_esakrissa-weather",
+    "mcp_version": "1.29.0",
+    "entrypoint": "cffi-gen-src.exe",
+    "verdict": "STARTS_OK",
+    "detail": "rc=2"
+  },
+  {
+    "package": "mcp-automl",
+    "verdict": "INSTALL_FAILED",
+    "detail": "un: C:\\Users\\user\\AppData\\Local\\Temp\\pip-build-env-1l2rd8cu\\normal\\Scripts\\ninja.EXE\n  [end of output]\n  \n  note: This error originates from a subprocess, and is likely not a problem with pip.\nerror: metadata-generation-failed\n\nEncountered error while generating package metadata.\n\nSee above for output.\n\nnote: This is an issue with the package mentioned above, not pip.\nhint: See above for details.\n"
+  },
+  {
+    "package": "mcp-stdio-toolbox",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mcp-stdio-toolbox.exe",
+    "verdict": "STARTS_OK",
+    "detail": "rc=0"
+  }
+]

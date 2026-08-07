@@ -1,0 +1,213 @@
+[
+  {
+    "package": "mcp-server-git",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mcp-server-git.exe",
+    "verdict": "BROKEN",
+    "error": "AttributeError: 'Server' object has no attribute 'list_tools'",
+    "traceback": "    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Python313\\Lib\\asyncio\\runners.py\", line 195, in run\n    return runner.run(main)\n           ~~~~~~~~~~^^^^^^\n  File \"C:\\Python313\\Lib\\asyncio\\runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"C:\\Python313\\Lib\\asyncio\\base_events.py\", line 725, in run_until_complete\n    return future.result()\n           ~~~~~~~~~~~~~^^\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_git\\Lib\\site-packages\\mcp_server_git\\server.py\", line 321, in serve\n    @server.list_tools()\n     ^^^^^^^^^^^^^^^^^\nAttributeError: 'Server' object has no attribute 'list_tools'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "mcp-server-time",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mcp-server-time.exe",
+    "verdict": "BROKEN",
+    "error": "ImportError: cannot import name 'McpError' from 'mcp.shared.exceptions' (C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_time\\Lib\\site-packages\\mcp\\shared\\exceptions.py). Did you mean",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_time\\Scripts\\mcp-server-time.exe\\__main__.py\", line 2, in <module>\n    from mcp_server_time import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_time\\Lib\\site-packages\\mcp_server_time\\__init__.py\", line 1, in <module>\n    from .server import serve\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_time\\Lib\\site-packages\\mcp_server_time\\server.py\", line 12, in <module>\n    from mcp.shared.exceptions import McpError\nImportError: cannot import name 'McpError' from 'mcp.shared.exceptions' (C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_time\\Lib\\site-packages\\mcp\\shared\\exceptions.py). Did you mean: 'MCPError'?",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "mcp-server-fetch",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mcp-server-fetch.exe",
+    "verdict": "BROKEN",
+    "error": "ImportError: cannot import name 'McpError' from 'mcp.shared.exceptions' (C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_fetch\\Lib\\site-packages\\mcp\\shared\\exceptions.py). Did you mea",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_fetch\\Scripts\\mcp-server-fetch.exe\\__main__.py\", line 2, in <module>\n    from mcp_server_fetch import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_fetch\\Lib\\site-packages\\mcp_server_fetch\\__init__.py\", line 1, in <module>\n    from .server import serve\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_fetch\\Lib\\site-packages\\mcp_server_fetch\\server.py\", line 6, in <module>\n    from mcp.shared.exceptions import McpError\nImportError: cannot import name 'McpError' from 'mcp.shared.exceptions' (C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_fetch\\Lib\\site-packages\\mcp\\shared\\exceptions.py). Did you mean: 'MCPError'?",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "mcp-server-sqlite",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mcp-server-sqlite.exe",
+    "verdict": "BROKEN",
+    "error": "AttributeError: 'Server' object has no attribute 'list_resources'",
+    "traceback": "    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Python313\\Lib\\asyncio\\runners.py\", line 195, in run\n    return runner.run(main)\n           ~~~~~~~~~~^^^^^^\n  File \"C:\\Python313\\Lib\\asyncio\\runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"C:\\Python313\\Lib\\asyncio\\base_events.py\", line 725, in run_until_complete\n    return future.result()\n           ~~~~~~~~~~~~~^^\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_sqlite\\Lib\\site-packages\\mcp_server_sqlite\\server.py\", line 173, in main\n    @server.list_resources()\n     ^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'Server' object has no attribute 'list_resources'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "mcp-server-sentry",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mcp-server-sentry.exe",
+    "verdict": "BROKEN",
+    "error": "ModuleNotFoundError: No module named 'httpx'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_sentry\\Scripts\\mcp-server-sentry.exe\\__main__.py\", line 2, in <module>\n    from mcp_server_sentry import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_sentry\\Lib\\site-packages\\mcp_server_sentry\\__init__.py\", line 1, in <module>\n    from . import server\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_sentry\\Lib\\site-packages\\mcp_server_sentry\\server.py\", line 6, in <module>\n    import httpx\nModuleNotFoundError: No module named 'httpx'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "playwright-mcp",
+    "mcp_version": "2.0.0",
+    "entrypoint": "playwright-mcp.exe",
+    "verdict": "BROKEN",
+    "error": "AttributeError: 'Server' object has no attribute 'list_resources'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_playwright_mcp\\Scripts\\playwright-mcp.exe\\__main__.py\", line 2, in <module>\n    from playwright_mcp import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_playwright_mcp\\Lib\\site-packages\\playwright_mcp\\__init__.py\", line 1, in <module>\n    from . import server\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_playwright_mcp\\Lib\\site-packages\\playwright_mcp\\server.py\", line 24, in <module>\n    @server.list_resources()\n     ^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'Server' object has no attribute 'list_resources'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "mcp-server-notion",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mcp-server-notion.exe",
+    "verdict": "BROKEN",
+    "error": "AttributeError: 'Server' object has no attribute 'list_tools'",
+    "traceback": "    ~~~~~~~~~~~^^^^^^^^^\n  File \"C:\\Python313\\Lib\\asyncio\\runners.py\", line 195, in run\n    return runner.run(main)\n           ~~~~~~~~~~^^^^^^\n  File \"C:\\Python313\\Lib\\asyncio\\runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"C:\\Python313\\Lib\\asyncio\\base_events.py\", line 725, in run_until_complete\n    return future.result()\n           ~~~~~~~~~~~~~^^\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_notion\\Lib\\site-packages\\mcp_server_notion\\server.py\", line 47, in serve\n    @server.list_tools()\n     ^^^^^^^^^^^^^^^^^\nAttributeError: 'Server' object has no attribute 'list_tools'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "mcp-server-obsidian",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mcp-server-obsidian.exe",
+    "verdict": "STARTS_OK",
+    "detail": "rc=2"
+  },
+  {
+    "package": "mcp-server-weather",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mcp-server-weather.exe",
+    "verdict": "BROKEN",
+    "error": "ModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_weather\\Scripts\\mcp-server-weather.exe\\__main__.py\", line 2, in <module>\n    from main import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_weather\\Lib\\site-packages\\main.py\", line 5, in <module>\n    from mcp.server.fastmcp import FastMCP\nModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "mcp-server-calculator",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mcp-server-calculator.exe",
+    "verdict": "BROKEN",
+    "error": "ModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_calculator\\Scripts\\mcp-server-calculator.exe\\__main__.py\", line 2, in <module>\n    from mcp_server_calculator import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_calculator\\Lib\\site-packages\\mcp_server_calculator\\__init__.py\", line 1, in <module>\n    from .calculator import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_calculator\\Lib\\site-packages\\mcp_server_calculator\\calculator.py\", line 4, in <module>\n    from mcp.server.fastmcp import FastMCP\nModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "mcp-server-shell",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mcp-server-shell.exe",
+    "verdict": "BROKEN",
+    "error": "ImportError: cannot import name 'McpError' from 'mcp.shared.exceptions' (C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_shell\\Lib\\site-packages\\mcp\\shared\\exceptions.py). Did you mea",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_shell\\Scripts\\mcp-server-shell.exe\\__main__.py\", line 2, in <module>\n    from mcp_server_shell.server import serve\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_shell\\Lib\\site-packages\\mcp_server_shell\\__init__.py\", line 1, in <module>\n    from .server import serve\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_shell\\Lib\\site-packages\\mcp_server_shell\\server.py\", line 8, in <module>\n    from mcp.shared.exceptions import McpError\nImportError: cannot import name 'McpError' from 'mcp.shared.exceptions' (C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_shell\\Lib\\site-packages\\mcp\\shared\\exceptions.py). Did you mean: 'MCPError'?",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "mcp-server-ssh",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mcp-server-ssh.exe",
+    "verdict": "BROKEN",
+    "error": "AttributeError: 'Server' object has no attribute 'list_resources'",
+    "traceback": "    return self._loop.run_until_complete(task)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"C:\\Python313\\Lib\\asyncio\\base_events.py\", line 725, in run_until_complete\n    return future.result()\n           ~~~~~~~~~~~~~^^\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_ssh\\Lib\\site-packages\\mcp_server_ssh\\__main__.py\", line 22, in main\n    ssh_server = SSHMCPServer()\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_ssh\\Lib\\site-packages\\mcp_server_ssh\\server.py\", line 67, in __init__\n    self.setup_handlers()\n    ~~~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_ssh\\Lib\\site-packages\\mcp_server_ssh\\server.py\", line 75, in setup_handlers\n    @self.server.list_resources()\n     ^^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'Server' object has no attribute 'list_resources'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "mcp-server-jira",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mcp-server-jira.exe",
+    "verdict": "BROKEN",
+    "error": "ImportError: cannot import name 'McpError' from 'mcp.shared.exceptions' (C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_jira\\Lib\\site-packages\\mcp\\shared\\exceptions.py). Did you mean",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_jira\\Scripts\\mcp-server-jira.exe\\__main__.py\", line 2, in <module>\n    from mcp_server_jira import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_jira\\Lib\\site-packages\\mcp_server_jira\\__init__.py\", line 1, in <module>\n    from .server import serve\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_jira\\Lib\\site-packages\\mcp_server_jira\\server.py\", line 11, in <module>\n    from mcp.shared.exceptions import McpError\nImportError: cannot import name 'McpError' from 'mcp.shared.exceptions' (C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_jira\\Lib\\site-packages\\mcp\\shared\\exceptions.py). Did you mean: 'MCPError'?",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "mcp-server-redis",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mcp-server-redis.exe",
+    "verdict": "BROKEN",
+    "error": "ModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_redis\\Scripts\\mcp-server-redis.exe\\__main__.py\", line 2, in <module>\n    from mcp_server_redis import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_redis\\Lib\\site-packages\\mcp_server_redis\\__init__.py\", line 1, in <module>\n    from mcp_server_redis.server import mcp\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_redis\\Lib\\site-packages\\mcp_server_redis\\server.py\", line 1, in <module>\n    from mcp.server.fastmcp import FastMCP\nModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "mcp-server-duckdb",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mcp-server-duckdb.exe",
+    "verdict": "STARTS_OK",
+    "detail": "rc=2"
+  },
+  {
+    "package": "mcp-server-bigquery",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mcp-server-bigquery.exe",
+    "verdict": "STARTS_OK",
+    "detail": "rc=1"
+  },
+  {
+    "package": "mcp-server-snowflake",
+    "verdict": "INSTALL_FAILED",
+    "detail": "python version: 0.3.3 Requires-Python >=3.10,<3.13; 0.3.4 Requires-Python >=3.10,<3.13; 0.3.5 Requires-Python >=3.10,<3.13; 0.3.6 Requires-Python >=3.10,<3.13; 0.3.7 Requires-Python >=3.10,<3.13; 0.3.8 Requires-Python >=3.10,<3.13\nERROR: Could not find a version that satisfies the requirement mcp-server-snowflake (from versions: none)\nERROR: No matching distribution found for mcp-server-snowflake\n"
+  },
+  {
+    "package": "mcp-server-rag",
+    "verdict": "INSTALL_FAILED",
+    "detail": ""
+  },
+  {
+    "package": "mcp-server-milvus",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mcp-server-milvus.exe",
+    "verdict": "BROKEN",
+    "error": "ModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_milvus\\Scripts\\mcp-server-milvus.exe\\__main__.py\", line 2, in <module>\n    from mcp_server_milvus.server import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_milvus\\Lib\\site-packages\\mcp_server_milvus\\server.py\", line 5, in <module>\n    from mcp.server.fastmcp import Context, FastMCP\nModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "mcp-server-neo4j",
+    "mcp_version": "2.0.0",
+    "entrypoint": "mcp-server-neo4j.exe",
+    "verdict": "BROKEN",
+    "error": "ImportError: cannot import name 'McpError' from 'mcp.shared.exceptions' (C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_neo4j\\Lib\\site-packages\\mcp\\shared\\exceptions.py). Did you mea",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_neo4j\\Scripts\\mcp-server-neo4j.exe\\__main__.py\", line 2, in <module>\n    from mcp_server_neo4j import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_neo4j\\Lib\\site-packages\\mcp_server_neo4j\\__init__.py\", line 1, in <module>\n    from .server import serve\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_neo4j\\Lib\\site-packages\\mcp_server_neo4j\\server.py\", line 12, in <module>\n    from mcp.shared.exceptions import McpError\nImportError: cannot import name 'McpError' from 'mcp.shared.exceptions' (C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_mcp_server_neo4j\\Lib\\site-packages\\mcp\\shared\\exceptions.py). Did you mean: 'MCPError'?",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "pubmed-mcp-server",
+    "mcp_version": "2.0.0",
+    "entrypoint": "pubmed_mcp_server.exe",
+    "verdict": "BROKEN",
+    "error": "ModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_pubmed_mcp_server\\Scripts\\pubmed_mcp_server.exe\\__main__.py\", line 2, in <module>\n    from pubmed_mcp_server.main import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_pubmed_mcp_server\\Lib\\site-packages\\pubmed_mcp_server\\__init__.py\", line 3, in <module>\n    from .main import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_pubmed_mcp_server\\Lib\\site-packages\\pubmed_mcp_server\\main.py\", line 1, in <module>\n    from mcp.server.fastmcp import FastMCP\nModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "yfinance-mcp",
+    "mcp_version": "2.0.0",
+    "entrypoint": "yfinance-mcp.exe",
+    "verdict": "BROKEN",
+    "error": "ModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_yfinance_mcp\\Scripts\\yfinance-mcp.exe\\__main__.py\", line 2, in <module>\n    from yfinance_mcp.server import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_yfinance_mcp\\Lib\\site-packages\\yfinance_mcp\\server.py\", line 7, in <module>\n    from mcp.server.fastmcp import FastMCP\nModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  },
+  {
+    "package": "prometheus-mcp",
+    "mcp_version": "2.0.0",
+    "entrypoint": "prometheus-mcp.exe",
+    "verdict": "BROKEN",
+    "error": "ModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "traceback": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_prometheus_mcp\\Scripts\\prometheus-mcp.exe\\__main__.py\", line 2, in <module>\n    from prometheus_mcp.server import main\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_prometheus_mcp\\Lib\\site-packages\\prometheus_mcp\\server.py\", line 7, in <module>\n    from prometheus_mcp import tools as _tools  # noqa: F401\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_prometheus_mcp\\Lib\\site-packages\\prometheus_mcp\\tools.py\", line 24, in <module>\n    from prometheus_mcp import output\n  File \"C:\\Users\\user\\AppData\\Local\\Temp\\mcpverify_b0wht0s6\\v_prometheus_mcp\\Lib\\site-packages\\prometheus_mcp\\output.py\", line 8, in <module>\n    from mcp.server.fastmcp.exceptions import ToolError\nModuleNotFoundError: No module named 'mcp.server.fastmcp'",
+    "fix_confirmed": true,
+    "mcp_after_pin": "1.29.0"
+  }
+]
